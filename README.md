@@ -29,3 +29,13 @@ Your task is simple but open-ended: **Create an application that utilizes the Ti
 ### Resources
 
 - [Ticketmaster API Explorer](https://developer.ticketmaster.com/api-explorer/v2/)
+
+## Alternative Submission
+
+If you have a public repository that showcases your skills through a project you've independently worked on, and it is either deployed online or can be easily built and run locally, we encourage you to submit that instead. When submitting an existing project, please ensure:
+
+- The repository is accessible to the public.
+- You provide a clear `README.md` with setup instructions and an overview of the project's functionality.
+- The project is primarily your work and reflects your abilities.
+
+Please submit your project following the same [Submission Guidelines](#submission-guidelines) mentioned above, including a note in your pull request indicating this is an alternative submission.
