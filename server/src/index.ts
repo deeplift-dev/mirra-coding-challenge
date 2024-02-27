@@ -3,8 +3,8 @@ import { Hono } from 'hono'
 import { cors } from 'hono/cors'
 import { logger } from 'hono/logger'
 import { z } from 'zod'
-import type { Events, Event as EventType } from './../../shared/types/ticketmaster.d'
-import { fetchEventById, fetchEvents } from './services/ticketMaster'
+import type { Events, Event as EventType, Attraction } from './../../shared/types/ticketmaster.d'
+import { fetchAttractionById, fetchEventById, fetchEvents } from './services/ticketMaster'
 
 const app = new Hono()
 app.use('/*', cors())
@@ -23,10 +23,10 @@ async (c) => {
     const response = await fetchEvents(page || 0)
 
     // There is an issue where the ky library uses response.clone()
-    // internally, and bun is currently experiencing a race condition
-    // and returning an empty response. Adding another await
-    // seems to fix this. PR for fix open here:
-    // https://github.com/oven-sh/bun/pull/6468
+    // internally, and bun is currently experiencing a race 
+    // condition and returning an empty response. Adding 
+    // another await seems to fix this. PR for fix open 
+    // here: https://github.com/oven-sh/bun/pull/6468
     const jsonResponse: Events = await response as Events
     
     return c.json({
@@ -43,6 +43,19 @@ app.get('/events/:id', async (c) => {
     const response = await fetchEventById(id)
     const jsonResponse: EventType = await response as EventType
 
+    return c.json({
+      ...jsonResponse
+    })
+  } catch (error) {
+    return c.json({ error: error }, 500)
+  }
+})
+
+app.get('/attractions/:id', async (c) => {
+  const id = c.req.param('id')
+  try {
+    const response = await fetchAttractionById(id)
+    const jsonResponse: Attraction = await response as Attraction
     return c.json({
       ...jsonResponse
     })
