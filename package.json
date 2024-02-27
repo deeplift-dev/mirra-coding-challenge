@@ -16,6 +16,7 @@
     "typescript": "^5.0.0"
   },
   "dependencies": {
-    "@hono/eslint-config": "^0.0.4"
+    "@hono/eslint-config": "^0.0.4",
+    "@hono/zod-validator": "^0.1.11"
   }
 }
