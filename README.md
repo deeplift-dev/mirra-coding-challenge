@@ -1,5 +1,49 @@
 # Try with Mirra Coding Challenge
 
+## Running this project
+
+This project leverages the Bun runtime which is designed as a drop-in replacement for node.
+[You can read further about Bun here](https://bun.sh/docs).
+
+##### Requirements
+
+* Node v18.15.0
+* Bun
+
+#### Installing Bun [(full documentation here)](curl -fsSL https://bun.sh/install | bash )
+
+**macOS and Linux
+`curl -fsSL https://bun.sh/install | bash`**
+
+**Windows
+`powershell -x "irm bun.sh/install.ps1|iex"`**
+
+Note: you man have to restart your terminal to ensure bun is available for use.
+
+#### Setup
+
+```
+# Install dependencies
+bun install
+
+# Configure environment variables
+# There is an `.env.example` in the root directory you can use for reference, thn add your Tickermaster API key.
+cp .env.example .env
+
+# To start the client, from the root directory run command
+bun dev:client
+
+# To start the server (in a new terminal window), from the root directory run command
+bun dev:server
+
+# To run tests
+bun test
+
+```
+
+
+## Introduction
+
 This challenge is designed to test your creativity, coding skills, and ability to integrate third-party APIs into a functional application. Your completed project will be used to discuss your approach to solving problems and your technical skills.
 
 ## Challenge Overview
