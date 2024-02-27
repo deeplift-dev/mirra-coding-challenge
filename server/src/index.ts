@@ -4,7 +4,7 @@ import { cors } from 'hono/cors'
 import { logger } from 'hono/logger'
 import { z } from 'zod'
 import type { Events } from './../../shared/types/ticketmaster.d'
-import { fetchEvents } from './services/ticketMaster'
+import { fetchEventById, fetchEvents } from './services/ticketMaster'
 
 const app = new Hono()
 app.use('/*', cors())
@@ -30,6 +30,19 @@ async (c) => {
     // https://github.com/oven-sh/bun/pull/6468
     const jsonResponse: Events = await response as Events
     
+    return c.json({
+      ...jsonResponse
+    })
+  } catch (error) {
+    return c.json({ error: error }, 500)
+  }
+})
+
+app.get('/events/:id', async (c) => {
+  const id = c.req.param('id')
+  try {
+    const response = await fetchEventById(id)
+    const jsonResponse = await response
     return c.json({
       ...jsonResponse
     })

@@ -9,9 +9,43 @@ const api = ky.extend({
 })
 
 export const fetchEvents = async (page: number) => {
-    const response = await api.get('events.json', {
-        searchParams: { page },
-    })
+    try {
+        const response = await api.get('events.json', {
+            searchParams: { page },
+        })
+        if (!response.ok) {
+            throw new Error(`API request failed with status ${response.status}`)
+        }
+        const jsonResponse = await response.json()
+        if (!jsonResponse || Object.keys(jsonResponse).length === 0) {
+            throw new Error('No data returned from the API')
+        }
+        return jsonResponse
+    } catch (error) {
+        if (error instanceof Error) {
+            throw new Error(`Fetching events failed: ${error.message}`)
+        } else {
+            throw new Error('An unknown error occurred while fetching events')
+        }
+    }
+}
 
-    return response.json()
+export async function fetchEventById(id: string) {
+    try {
+        const response = await api.get(`events/${id}.json`)
+        if (!response.ok) {
+            throw new Error(`API request failed with status ${response.status}`)
+        }
+        const jsonResponse = await response.json()
+        if (!jsonResponse || Object.keys(jsonResponse).length === 0) {
+            throw new Error('No data returned from the API')
+        }
+        return jsonResponse
+    } catch (error) {
+        if (error instanceof Error) {
+            throw new Error(`Fetching event by ID failed: ${error.message}`)
+        } else {
+            throw new Error('An unknown error occurred while fetching event by ID')
+        }
+    }
 }
