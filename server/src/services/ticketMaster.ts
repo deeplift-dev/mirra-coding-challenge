@@ -4,15 +4,13 @@ const api = ky.extend({
     prefixUrl: 'https://app.ticketmaster.com/discovery/v2',
     searchParams: {
         apikey: process.env.TICKETMASTER_API_KEY || '',
-        countryCode: 'AU', // Hardcoding to AU for now, but this likely would be a query param
+        countryCode: 'AU',
     },
 })
 
-export const fetchEvents = async (page: number) => {
+async function fetchFromAPI(endpoint: string, searchParams: Record<string, any> = {}) {
     try {
-        const response = await api.get('events.json', {
-            searchParams: { page },
-        })
+        const response = await api.get(`${endpoint}.json`, { searchParams })
         if (!response.ok) {
             throw new Error(`API request failed with status ${response.status}`)
         }
@@ -23,29 +21,21 @@ export const fetchEvents = async (page: number) => {
         return jsonResponse
     } catch (error) {
         if (error instanceof Error) {
-            throw new Error(`Fetching events failed: ${error.message}`)
+            throw new Error(`Fetching from ${endpoint} failed: ${error.message}`)
         } else {
-            throw new Error('An unknown error occurred while fetching events')
+            throw new Error(`An unknown error occurred while fetching from ${endpoint}`)
         }
     }
 }
 
-export async function fetchEventById(id: string) {
-    try {
-        const response = await api.get(`events/${id}.json`)
-        if (!response.ok) {
-            throw new Error(`API request failed with status ${response.status}`)
-        }
-        const jsonResponse = await response.json()
-        if (!jsonResponse || Object.keys(jsonResponse).length === 0) {
-            throw new Error('No data returned from the API')
-        }
-        return jsonResponse
-    } catch (error) {
-        if (error instanceof Error) {
-            throw new Error(`Fetching event by ID failed: ${error.message}`)
-        } else {
-            throw new Error('An unknown error occurred while fetching event by ID')
-        }
-    }
+export const fetchEvents = async (page: number) => {
+    return fetchFromAPI('events', { page })
+}
+
+export const fetchEventById = async (id: string) => {
+    return fetchFromAPI(`events/${id}`)
+}
+
+export const fetchAttractionById = async (id: string) => {
+    return fetchFromAPI(`attractions/${id}`)
 }
