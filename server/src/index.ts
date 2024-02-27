@@ -3,6 +3,7 @@ import { cors } from 'hono/cors'
 import { logger } from 'hono/logger'
 import { zValidator } from '@hono/zod-validator'
 import { z } from 'zod'
+import { fetchEvents } from './services/ticketMaster'
 
 const app = new Hono();
 app.use('/*', cors());
