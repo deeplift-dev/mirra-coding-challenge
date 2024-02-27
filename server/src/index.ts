@@ -3,7 +3,7 @@ import { Hono } from 'hono'
 import { cors } from 'hono/cors'
 import { logger } from 'hono/logger'
 import { z } from 'zod'
-import type { Events } from './../../shared/types/ticketmaster.d'
+import type { Events, Event as EventType } from './../../shared/types/ticketmaster.d'
 import { fetchEventById, fetchEvents } from './services/ticketMaster'
 
 const app = new Hono()
@@ -21,7 +21,6 @@ async (c) => {
   const { page } = c.req.valid('query')
   try {
     const response = await fetchEvents(page || 0)
-
 
     // There is an issue where the ky library uses response.clone()
     // internally, and bun is currently experiencing a race condition
@@ -42,7 +41,8 @@ app.get('/events/:id', async (c) => {
   const id = c.req.param('id')
   try {
     const response = await fetchEventById(id)
-    const jsonResponse = await response
+    const jsonResponse: EventType = await response as EventType
+
     return c.json({
       ...jsonResponse
     })
