@@ -1,18 +1,21 @@
 {
-    "name": "mirra-challenge",
-    "workspaces": [
-        "./server",
-        "./client"
-    ],
-    "scripts": {
-        "dev:client": "cd client && bun run dev",
-        "dev:server": "cd server && bun run dev",
-        "build:client": "cd client && bun run build"
-    },
-    "devDependencies": {
+  "name": "mirra-challenge",
+  "workspaces": [
+    "./server",
+    "./client"
+  ],
+  "scripts": {
+    "dev:client": "cd client && bun run dev",
+    "dev:server": "cd server && bun run dev",
+    "build:client": "cd client && bun run build"
+  },
+  "devDependencies": {
     "bun-types": "latest"
-    },
-    "peerDependencies": {
-        "typescript": "^5.0.0"
-    }
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "@hono/eslint-config": "^0.0.4"
+  }
 }
