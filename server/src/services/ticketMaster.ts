@@ -28,12 +28,16 @@ async function fetchFromAPI(endpoint: string, searchParams: Record<string, any> 
     }
 }
 
-export const fetchEvents = async (page: number) => {
-    return fetchFromAPI('events', { page })
+export const fetchEvents = async (page: number, attractionId: string) => {
+    return fetchFromAPI('events', { page, attractionId })
 }
 
 export const fetchEventById = async (id: string) => {
     return fetchFromAPI(`events/${id}`)
+}
+
+export const fetchAttractions = async (page: number) => {
+    return fetchFromAPI('attractions', { page })
 }
 
 export const fetchAttractionById = async (id: string) => {

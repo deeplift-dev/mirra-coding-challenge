@@ -355,3 +355,102 @@ export interface Page {
     totalPages:    number;
     number:        number;
 }
+
+export interface Attractions {
+    _embedded: Embedded;
+    _links:    AttractionsLinks;
+    page:      Page;
+}
+
+export interface Embedded {
+    attractions: Attraction[];
+}
+
+export interface Attraction {
+    name:            string;
+    type:            Type;
+    id:              string;
+    test:            boolean;
+    url:             string;
+    locale:          Locale;
+    externalLinks?:  ExternalLinks;
+    images:          Image[];
+    classifications: Classification[];
+    upcomingEvents:  { [key: string]: number };
+    _links:          AttractionLinks;
+    draftStatus?:    string;
+}
+
+export interface AttractionLinks {
+    self: First;
+}
+
+export interface First {
+    href: string;
+}
+
+export interface Classification {
+    primary:  boolean;
+    segment:  Genre;
+    genre:    Genre;
+    subGenre: Genre;
+    type:     Genre;
+    subType:  Genre;
+    family:   boolean;
+}
+
+export interface Genre {
+    id:   string;
+    name: string;
+}
+
+export interface ExternalLinks {
+    youtube?:     Facebook[];
+    twitter?:     Facebook[];
+    itunes?:      Facebook[];
+    lastfm?:      Facebook[];
+    facebook?:    Facebook[];
+    wiki?:        Facebook[];
+    spotify?:     Facebook[];
+    instagram?:   Facebook[];
+    musicbrainz?: Musicbrainz[];
+    homepage?:    Facebook[];
+    other?:       Facebook[];
+}
+
+export interface Facebook {
+    url: string;
+}
+
+export interface Musicbrainz {
+    id: string;
+}
+
+export interface Image {
+    ratio?:   Ratio;
+    url:      string;
+    width:    number;
+    height:   number;
+    fallback: boolean;
+}
+
+export enum Ratio {
+    The16_9 = "16_9",
+    The3_2 = "3_2",
+    The4_3 = "4_3",
+}
+
+export enum Locale {
+    EnUs = "en-us",
+}
+
+export enum Type {
+    Attraction = "attraction",
+}
+
+export interface AttractionsLinks {
+    first: First;
+    self:  First;
+    next:  First;
+    last:  First;
+}
