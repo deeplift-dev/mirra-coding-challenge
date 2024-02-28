@@ -10,10 +10,11 @@ This project leverages the Bun runtime which is designed as a drop-in replacemen
 * Node v18.15.0
 * Bun
 
-#### Installing Bun [(full documentation here)](curl -fsSL https://bun.sh/install | bash )
+#### Installing Bun
 
-**macOS and Linux
-`curl -fsSL https://bun.sh/install | bash`**
+#### **macOS and Linux**
+
+**`curl -fsSL https://bun.sh/install | bash`**
 
 **Windows
 `powershell -x "irm bun.sh/install.ps1|iex"`**
@@ -40,7 +41,6 @@ bun dev:server
 bun test
 
 ```
-
 
 ## Introduction
 
