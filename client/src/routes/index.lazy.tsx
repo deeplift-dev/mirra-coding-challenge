@@ -63,11 +63,20 @@ const AttractionsGrid = () => {
 const AttractionCard = ({ attraction }: { attraction: Attraction }) => {
   return (
     <Link to={`/attractions/${attraction.id}`}
-      className='cursor-pointer bg-white p-2 shadow border border-gray-200 rounded-lg hover:shadow-md transition-all duration-300'
+      className='cursor-pointer bg-white p-2 shadow border border-gray-200 rounded-lg hover:shadow-md hover:border-gray-400 transition-all duration-300'
       key={attraction.id}
     >
-      <img src={attraction.images[2].url} alt={attraction.name} className='w-full h-40 object-cover rounded-lg' />
+      <img
+        src={attraction.images.find(image => image.width >= 200)?.url}
+        alt={attraction.name}
+        className='w-full h-40 object-cover rounded-lg'
+      />
       <p className='font-medium py-2'>{attraction.name}</p>
+      <p
+        className='text-sm text-gray-500'
+      >
+          {attraction.upcomingEvents?._total || 0} upcoming {attraction.upcomingEvents?._total === 1 ? 'event' : 'events'}
+      </p>
     </Link>
   )
 }

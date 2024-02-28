@@ -29,8 +29,6 @@ function Attraction() {
     queryFn: () => fetchAttraction(),
   })
 
-  console.log(data);
-
   if (isLoading) {
     return <div>Loading...</div>
   }
@@ -108,14 +106,16 @@ const Events = ({attractionId}: {attractionId: string}) => {
 
 const EventCard = ({ event }: { event: EventType }) => {
   const formattedDate = format(parseISO(String(event.dates.start.localDate)), "EEEE dd, MMMM yyyy");
-  console.log(event)
 
   return (
     <Link to={event.url}
-      className='border border-gray-200 p-2 rounded-lg shadow hover:shadow-md cursor-pointer'
+      className='border border-gray-200 p-2 rounded-lg shadow hover:shadow-md hover:border-gray-400 cursor-pointer transition-all duration-300'
     >
       <div>
-        <img className='h-40 w-full object-cover rounded-md' src={event.images[0].url} alt={event.name} />
+        <img className='h-40 w-full object-cover rounded-md'
+          src={event.images.find(image => image.width >= 250)?.url || event.images[0].url}
+          alt={event.name}
+        />
         <p className='font-bold pt-2 border-t border-gray-100'>{event.name}</p>
         <p>{event?._embedded?.venues[0].name}</p>
         <p>{formattedDate}</p>
