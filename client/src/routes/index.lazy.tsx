@@ -62,7 +62,10 @@ const AttractionsGrid = () => {
 
 const AttractionCard = ({ attraction }: { attraction: Attraction }) => {
   return (
-    <Link to={`/attractions/${attraction.id}`} className='cursor-pointer bg-white p-2 shadow border border-gray-200 rounded-lg hover:shadow-md transition-all duration-300' key={attraction.id}>
+    <Link to={`/attractions/${attraction.id}`}
+      className='cursor-pointer bg-white p-2 shadow border border-gray-200 rounded-lg hover:shadow-md transition-all duration-300'
+      key={attraction.id}
+    >
       <img src={attraction.images[2].url} alt={attraction.name} className='w-full h-40 object-cover rounded-lg' />
       <p className='font-medium py-2'>{attraction.name}</p>
     </Link>

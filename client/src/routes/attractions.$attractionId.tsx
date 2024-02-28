@@ -46,7 +46,10 @@ function Attraction() {
   return (
     <div className="space-y-2 max-w-screen-md mx-auto">
       <div className='w-full flex flex-col justify-center p-4'>
-          <img className='rounded-xl w-full object-cover h-80' src={data?.images[0].url} alt={data?.name} />
+          <img 
+            className='rounded-xl w-full object-cover h-80'
+            src={data?.images.find(image => image.width >= 700)?.url} alt={data?.name}
+          />
           <div className='pt-4'>
             <h4 className="text-xl font-bold underline mb-4">{data?.name}</h4>
             <Events attractionId={attractionId} />
@@ -108,7 +111,9 @@ const EventCard = ({ event }: { event: EventType }) => {
   console.log(event)
 
   return (
-    <Link to={event.url} className='border border-gray-200 p-2 rounded-lg shadow hover:shadow-md cursor-pointer'>
+    <Link to={event.url}
+      className='border border-gray-200 p-2 rounded-lg shadow hover:shadow-md cursor-pointer'
+    >
       <div>
         <img className='h-40 w-full object-cover rounded-md' src={event.images[0].url} alt={event.name} />
         <p className='font-bold pt-2 border-t border-gray-100'>{event.name}</p>
