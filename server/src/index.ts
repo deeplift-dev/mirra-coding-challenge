@@ -15,7 +15,7 @@ zValidator(
   'query',
   z.object({
     page: z.string().pipe(z.coerce.number().min(0)).optional(),
-    attractionId: z.string().optional()
+    attractionId: z.string()
   })
 ),
 async (c) => {
