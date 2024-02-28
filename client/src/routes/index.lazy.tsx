@@ -50,7 +50,7 @@ const AttractionsGrid = () => {
       ) : (
         <div className='grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-2'>
           {data?._embedded?.attractions?.map((attraction) => (
-            <AttractionCard attraction={attraction} />
+            <AttractionCard key={attraction.id} attraction={attraction} />
           ))}
         </div>
       )}

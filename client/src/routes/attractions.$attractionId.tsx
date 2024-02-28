@@ -95,7 +95,7 @@ const Events = ({attractionId}: {attractionId: string}) => {
         }
         <div className='grid grid-cols-1 md:grid-cols-2 gap-2 mt-4'>
           {data?._embedded?.events?.map((event) => (
-            <EventCard event={event} />
+            <EventCard key={event.id} event={event} />
           ))}
         </div>
         </div>
